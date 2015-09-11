@@ -3,14 +3,19 @@
 
 __author__ = "whitehaven"
 
-from sys import stdin
+import sys
 import argparse
 from random import randint
 
 BLOCK_SIZE = 8
 
-parser = argparse.ArgumentParser()
-parser.add_argument("TARGET", type=str, help="encryption target")
+parser = argparse.ArgumentParser(description='WHI Obfuscation Cipher v1.0')
+parser.add_argument('--version', action='version', version='ObFUscate v1.0 | 11 Sept 2015')
+
+parser.add_argument('infile', nargs='?', type=argparse.FileType('r'), default=sys.stdin)
+
+parser.add_argument('outfile', nargs='?', type=argparse.FileType('w'), default=sys.stdout)
+
 args = parser.parse_args()
 
 
@@ -24,7 +29,6 @@ def garblist(blist):
     return garbledlist
 
 
-# this function is separate because it is useful elsewhere
 def binlist(char):  # returns list of 1|0
     result = []
     while char:
@@ -54,29 +58,12 @@ def str2garble(subject):
     return garbled
 
 
-# encryptThis = bytearray(input("Encryption Target: "), 'utf-8')
-
-
-garbledNumerals = str2garble(bytearray(args.TARGET, 'utf-8'))
+garbledNumerals = str2garble(bytearray(args.infile.read(), 'utf-8'))
 
 for element in garbledNumerals:
     for subelement in element:
-        print("%c" % (subelement), end="")
-
-
-
-# argparse these options
-#	-h help
-#	-i inline
-# ?	-s? standard input
-#	-d decrypt mode
-
-# take -o= for file output
-# otherwise, std input
-
-
-
-
+        args.outfile.write(chr(subelement))
+    args.outfile.write(' ')
 
 # function to convert garble chars to TF values into chars
 # receives strings of garble

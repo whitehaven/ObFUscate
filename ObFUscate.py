@@ -7,16 +7,6 @@ import sys
 import argparse
 from random import randint
 
-BLOCK_SIZE = 8
-
-parser = argparse.ArgumentParser(description='WHI Obfuscation Cipher v1.0')
-parser.add_argument('--version', action='version', version='ObFUscate v1.0 | 11 Sept 2015')
-
-parser.add_argument('infile', nargs='?', type=argparse.FileType('r'), default=sys.stdin)
-
-parser.add_argument('outfile', nargs='?', type=argparse.FileType('w'), default=sys.stdout)
-
-args = parser.parse_args()
 
 
 def garblist(blist):
@@ -45,7 +35,6 @@ def binlist(char):  # returns list of 1|0
 
 
 # function to convert chars to TF values to garble chars (8 bit, [0-255] range)
-# receives strings
 def str2garble(subject):
     results = []  # will be list of lists of 1|0
     garbled = []  # will be list of lists of a-m|n-z
@@ -54,16 +43,46 @@ def str2garble(subject):
     # now, results has list of lists of the string passed in (0 and 1s)
     for element in results:
         garbled.append(garblist(element))
-
     return garbled
 
 
-garbledNumerals = str2garble(bytearray(args.infile.read(), 'utf-8'))
+# main encryption process:
+def encryptMode():
+    garbledNumerals = str2garble(bytearray(args.infile.read(), 'utf-8'))
+    for element in garbledNumerals:
+        for subelement in element:
+            args.outfile.write(chr(subelement))
+        args.outfile.write(' ')
+    quit(0)
 
-for element in garbledNumerals:
-    for subelement in element:
-        args.outfile.write(chr(subelement))
-    args.outfile.write(' ')
 
-# function to convert garble chars to TF values into chars
-# receives strings of garble
+# main decryption process:
+def decryptMode():
+    print("decrypt fail")
+    quit(0)
+
+
+# entry point:
+parser = argparse.ArgumentParser(description='WHI Obfuscation Cipher v1.0')
+parser.add_argument('--version', action='version', version='ObFUscate v1.0 | 11 Sept 2015')
+
+subparsers = parser.add_subparsers(dest='mode')
+
+parser_encrypt = subparsers.add_parser('encrypt', help='execute (forward) operation')
+parser_encrypt.add_argument('infile', nargs='?', type=argparse.FileType('r'), default=sys.stdin,
+                            help='(default to stdin)')
+parser_encrypt.add_argument('outfile', nargs='?', type=argparse.FileType('w'), default=sys.stdout,
+                            help='(default to stdin)')
+
+parser_decrypt = subparsers.add_parser('decrypt', help='execute (backward) operation')
+parser_decrypt.add_argument('infile', nargs='?', type=argparse.FileType('r'), default=sys.stdin,
+                            help='(default to stdin)')
+parser_decrypt.add_argument('outfile', nargs='?', type=argparse.FileType('w'), default=sys.stdout,
+                            help='(default to stdin)')
+
+args = parser.parse_args()
+
+if args.mode == 'encrypt':
+    encryptMode()
+else:  # if args.mode == 'decrypt'
+    decryptMode()

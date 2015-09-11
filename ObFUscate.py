@@ -8,36 +8,32 @@ import argparse
 from random import randint
 
 
-def garblist(blist):
-    garbledlist = []
-    for element in blist:
-        if element == 1:
-            garbledlist.append(randint(ord('n'), ord('z')))
-        else:  # if element == 0
-            garbledlist.append(randint(ord('a'), ord('m')))
-    return garbledlist
-
-
-def binlist(char):  # returns list of 1|0
-    result = []
-    while char:
-        if char & 1 == 1:
-            result.append(1)
-        else:
-            result.append(0)
-        char >>= 1
-    if len(result) < 8:
-        for leftover in range(len(result), 8):
-            result.append(0)
-    result.reverse()
-    return result  # will be size 8
-
-
 # function to convert chars to TF values to garble chars (8 bit, [0-255] range)
 def str2garble(subject):
     garbled = []  # will be list of lists of a-m|n-z
     for element in subject:
-        garbled.append(garblist(binlist(element)))
+
+        result = []
+        while element:
+            if element & 1 == 1:
+                result.append(1)
+            else:
+                result.append(0)
+            element >>= 1
+        if len(result) < 8:
+            for leftover in range(len(result), 8):
+                result.append(0)
+        result.reverse()
+
+        garbledlist = []
+
+        for element in result:
+            if element == 1:
+                garbledlist.append(randint(ord('n'), ord('z')))
+            else:  # if element == 0
+                garbledlist.append(randint(ord('a'), ord('m')))
+
+        garbled.append(garbledlist)
 
     return garbled
 

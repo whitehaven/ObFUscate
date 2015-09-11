@@ -8,7 +8,6 @@ import argparse
 from random import randint
 
 
-
 def garblist(blist):
     garbledlist = []
     for element in blist:
@@ -45,8 +44,8 @@ def str2garble(subject):
 
 # main encryption process:
 def encryptMode():
-    garbledNumerals = str2garble(bytearray(args.infile.read(), 'utf-8'))
-    for element in garbledNumerals:
+    garblednumerals = str2garble(bytearray(args.infile.read(), 'utf-8'))
+    for element in garblednumerals:
         for subelement in element:
             args.outfile.write(chr(subelement))
     quit(0)

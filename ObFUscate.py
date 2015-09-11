@@ -43,7 +43,6 @@ def str2garble(subject):
     garbled = []  # will be list of lists of a-m|n-z
     for element in subject:
         results.append(binlist(element))
-    print(results)
     # now, results has list of lists of the string passed in (0 and 1s)
     for element in results:
         garbled.append(garblist(element))
@@ -57,6 +56,14 @@ def str2garble(subject):
 encryptThis = bytearray("Shiz", 'utf-8')
 
 print(str2garble(encryptThis))
+
+garbledNumerals = str2garble(encryptThis)
+
+for element in garbledNumerals:
+    for subelement in element:
+        print("%c" % (subelement), end="")
+    print("")
+
 
 # argparse these options
 #	-h help

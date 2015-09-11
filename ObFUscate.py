@@ -9,6 +9,10 @@ from random import randint
 
 BLOCK_SIZE = 8
 
+parser = argparse.ArgumentParser()
+parser.add_argument("TARGET", type=str, help="encryption target")
+args = parser.parse_args()
+
 
 def garblist(blist):
     garbledlist = []
@@ -50,19 +54,15 @@ def str2garble(subject):
     return garbled
 
 
-# function to convert garble chars to TF values into chars
-# receives strings of garble
+# encryptThis = bytearray(input("Encryption Target: "), 'utf-8')
 
-encryptThis = bytearray("Shiz", 'utf-8')
 
-print(str2garble(encryptThis))
-
-garbledNumerals = str2garble(encryptThis)
+garbledNumerals = str2garble(bytearray(args.TARGET, 'utf-8'))
 
 for element in garbledNumerals:
     for subelement in element:
         print("%c" % (subelement), end="")
-    print("")
+
 
 
 # argparse these options
@@ -74,14 +74,9 @@ for element in garbledNumerals:
 # take -o= for file output
 # otherwise, std input
 
-# > > encryption:
-# break down to chars
-# 	convert to binaryish arrays
-#	encrypt
-# 	output
 
-# > > decryption:
-# read in 8-byte bits
-#	decrypt
-# 	convert to char
-# 	output
+
+
+
+# function to convert garble chars to TF values into chars
+# receives strings of garble

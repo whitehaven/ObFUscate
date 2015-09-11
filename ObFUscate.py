@@ -52,7 +52,6 @@ def encryptMode():
     for element in garbledNumerals:
         for subelement in element:
             args.outfile.write(chr(subelement))
-        args.outfile.write(' ')
     quit(0)
 
 

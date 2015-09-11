@@ -1,0 +1,2 @@
+# ObFUscate
+Simple obfuscatory cipher

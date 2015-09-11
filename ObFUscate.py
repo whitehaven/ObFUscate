@@ -61,7 +61,7 @@ def decryptMode():
     quit(0)
 
 
-# entry point:
+# parser:
 parser = argparse.ArgumentParser(description='WHI Obfuscation Cipher v1.0')
 parser.add_argument('--version', action='version', version='ObFUscate v1.0 | 11 Sept 2015')
 
@@ -80,6 +80,8 @@ parser_decrypt.add_argument('outfile', nargs='?', type=argparse.FileType('w'), d
                             help='(default to stdin)')
 
 args = parser.parse_args()
+
+# entry point
 
 if args.mode == 'encrypt':
     encryptMode()

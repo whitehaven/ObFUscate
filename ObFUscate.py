@@ -36,13 +36,10 @@ def binlist(char):  # returns list of 1|0
 
 # function to convert chars to TF values to garble chars (8 bit, [0-255] range)
 def str2garble(subject):
-    results = []  # will be list of lists of 1|0
     garbled = []  # will be list of lists of a-m|n-z
     for element in subject:
-        results.append(binlist(element))
-    # now, results has list of lists of the string passed in (0 and 1s)
-    for element in results:
-        garbled.append(garblist(element))
+        garbled.append(garblist(binlist(element)))
+
     return garbled
 
 

@@ -56,3 +56,6 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# generated test, as opposed to demo test
+gen*

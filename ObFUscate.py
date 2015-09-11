@@ -5,10 +5,22 @@ __author__ = "whitehaven"
 
 from sys import stdin
 import argparse
+from random import randint
 
 BLOCK_SIZE = 8
 
 
+def garblist(blist):
+    garbledlist = []
+    for element in blist:
+        if element == 1:
+            garbledlist.append(randint(ord('n'), ord('z')))
+        else:  # if element == 0
+            garbledlist.append(randint(ord('a'), ord('m')))
+    return garbledlist
+
+
+# this function is separate because it is useful elsewhere
 def binlist(char):  # returns list of 1|0
     result = []
     while char:
@@ -21,17 +33,22 @@ def binlist(char):  # returns list of 1|0
         for leftover in range(len(result), 8):
             result.append(0)
     result.reverse()
-    return result  # must be size 8
+    return result  # will be size 8
 
 
 # function to convert chars to TF values to garble chars (8 bit, [0-255] range)
 # receives strings
 def str2garble(subject):
     results = []  # will be list of lists of 1|0
+    garbled = []  # will be list of lists of a-m|n-z
     for element in subject:
-        print(binlist(element))
         results.append(binlist(element))
-    return results
+    print(results)
+    # now, results has list of lists of the string passed in (0 and 1s)
+    for element in results:
+        garbled.append(garblist(element))
+
+    return garbled
 
 
 # function to convert garble chars to TF values into chars

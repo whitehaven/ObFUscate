@@ -14,6 +14,7 @@ def str2garble(subject):
     for element in subject:
 
         binarray = []
+
         while element:
             if element & 1 == 1:
                 binarray.append(1)
@@ -29,9 +30,9 @@ def str2garble(subject):
 
         for element in binarray:
             if element == 1:
-                garbledlist.append(randint(ord('n'), ord('z')))
+                garbledlist.append(randint(110, 122))  # note these are 'n' and 'z' (ord() has overhead)
             else:  # if element == 0
-                garbledlist.append(randint(ord('a'), ord('m')))
+                garbledlist.append(randint(97, 109))  # 'a' and 'm'
 
         garbled.append(garbledlist)
 

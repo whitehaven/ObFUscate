@@ -13,26 +13,20 @@ def str2garble(subject):
     garbled = []  # will be list of lists of a-m|n-z
     for element in subject:
 
-        binarray = []
+        garbledlist = []
 
         while element:
             if element & 1 == 1:
-                binarray.append(1)
-            else:
-                binarray.append(0)
-            element >>= 1
-        if len(binarray) < 8:
-            for leftover in range(len(binarray), 8):
-                binarray.append(0)
-        binarray.reverse()
-
-        garbledlist = []
-
-        for element in binarray:
-            if element == 1:
                 garbledlist.append(randint(110, 122))  # note these are 'n' and 'z' (ord() has overhead)
-            else:  # if element == 0
+            else:
                 garbledlist.append(randint(97, 109))  # 'a' and 'm'
+            element >>= 1
+
+        if len(garbledlist) < 8:  # if not 8, fill the rest with 0s
+            for leftover in range(len(garbledlist), 8):
+                garbledlist.append(randint(97, 109))
+
+        garbledlist.reverse()
 
         garbled.append(garbledlist)
 

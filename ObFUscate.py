@@ -10,6 +10,7 @@ from array import array
 
 ALPHABET_LENGTH = 26
 HALF_ALPHABET_LENGTH = int(ALPHABET_LENGTH / 2)
+BLOCK_LENGTH = 8
 
 # pre-generate random list of chars to avoid using randint(), which is face-meltingly slow
 AtoM = array('b', (range(ord('a'), ord('n'))))  # a-m
@@ -36,8 +37,8 @@ def str2garble(subject):
 
             index_premade_random_letters = (index_premade_random_letters + 1) % HALF_ALPHABET_LENGTH
 
-        if len(garbledlist) < 8:  # if not 8, fill the rest with 0s
-            for leftover in range(len(garbledlist), 8):
+        if len(garbledlist) < BLOCK_LENGTH:  # if not 8, fill the rest with 0s
+            for leftover in range(len(garbledlist), BLOCK_LENGTH):
                 garbledlist.append(AtoM[index_premade_random_letters])
 
         garbledlist.reverse()

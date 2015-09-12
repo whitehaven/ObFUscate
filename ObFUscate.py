@@ -5,26 +5,40 @@ __author__ = "whitehaven"
 
 import sys
 import argparse
-from random import randint
+from random import shuffle
+from array import array
+
+ALPHABET_LENGTH = 26
+HALF_ALPHABET_LENGTH = int(ALPHABET_LENGTH / 2)
+
+# pre-generate random list of chars to avoid using randint(), which is face-meltingly slow
+AtoM = array('b', (range(ord('a'), ord('n'))))  # a-m
+NtoZ = array('b', (range(ord('n'), ord('z') + 1)))  # n-z
+
+shuffle(AtoM)
+shuffle(NtoZ)
 
 
 # function to convert chars to TF values to garble chars (8 bit, [0-255] range)
 def str2garble(subject):
-    garbled = []  # will be list of lists of a-m|n-z
+    garbled = []
+    index_premade_random_letters = 0
     for element in subject:
 
         garbledlist = []
 
         while element:
             if element & 1 == 1:
-                garbledlist.append(randint(110, 122))  # note these are 'n' and 'z' (ord() has overhead)
+                garbledlist.append(NtoZ[index_premade_random_letters])
             else:
-                garbledlist.append(randint(97, 109))  # 'a' and 'm'
+                garbledlist.append(AtoM[index_premade_random_letters])
             element >>= 1
+
+            index_premade_random_letters = (index_premade_random_letters + 1) % HALF_ALPHABET_LENGTH
 
         if len(garbledlist) < 8:  # if not 8, fill the rest with 0s
             for leftover in range(len(garbledlist), 8):
-                garbledlist.append(randint(97, 109))
+                garbledlist.append(AtoM[index_premade_random_letters])
 
         garbledlist.reverse()
 

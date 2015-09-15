@@ -48,15 +48,6 @@ def str2garble(subject):
     return garbled
 
 
-# main encryption process:
-def encryptMode():
-    garblednumerals = str2garble(bytearray(args.infile.read(), 'utf-8'))
-    for element in garblednumerals:
-        for subelement in element:
-            args.outfile.write(chr(subelement))
-    quit(0)
-
-
 def garble2str(garbled_input):
     translated_list = []
     for char_block in range(0, len(garbled_input), BLOCK_LENGTH):
@@ -69,6 +60,15 @@ def garble2str(garbled_input):
     translated_string = ''.join(translated_list)
 
     return translated_string
+
+
+# main encryption process:
+def encryptMode():
+    garblednumerals = str2garble(bytearray(args.infile.read(), 'utf-8'))
+    for element in garblednumerals:
+        for subelement in element:
+            args.outfile.write(chr(subelement))
+    quit(0)
 
 
 # main decryption process:

@@ -64,3 +64,7 @@ gen*
 input.txt
 output.txt
 
+# input/output files after second example no longer needed
+dec-input.txt
+dec-output.txt
+

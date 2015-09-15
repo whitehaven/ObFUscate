@@ -57,9 +57,18 @@ def encryptMode():
     quit(0)
 
 
+def garble2str(subject):
+    # take by 8s
+        # add appropriate number for each
+
+        # append char to final list
+    pass
+
 # main decryption process:
 def decryptMode():
-    print("decrypt fail")
+    string_output = garble2str(bytearray(args.infile.read()), 'utf-8')
+    for element in string_output:
+        args.outfile.write(chr(element))
     quit(0)
 
 

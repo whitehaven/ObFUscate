@@ -61,8 +61,8 @@ target/
 gen*
 
 # input/output files after first example no longer needed
-input.txt
-output.txt
+enc-input.txt
+enc-output.txt
 
 # input/output files after second example no longer needed
 dec-input.txt

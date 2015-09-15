@@ -60,9 +60,6 @@ target/
 # generated test, as opposed to demo test
 gen*
 
-# my own profiling results folder
-Profiling/
-
 # input/output files after first example no longer needed
 input.txt
 output.txt

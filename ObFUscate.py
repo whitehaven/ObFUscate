@@ -57,18 +57,25 @@ def encryptMode():
     quit(0)
 
 
-def garble2str(subject):
-    # take by 8s
-        # add appropriate number for each
+def garble2str(garbled_input):
+    translated_list = []
+    for char_block in range(0, len(garbled_input), BLOCK_LENGTH):
+        char_total = 0
+        for char_of_8 in range(0 + char_block, BLOCK_LENGTH + char_block):
+            if garbled_input[char_of_8] >= 'n':  # if should be 1
+                char_total |= (0b1 << ((BLOCK_LENGTH - char_of_8 - 1) % BLOCK_LENGTH))
+        translated_list.append(chr(char_total))
 
-        # append char to final list
-    pass
+    translated_string = ''.join(translated_list)
+
+    return translated_string
+
 
 # main decryption process:
 def decryptMode():
-    string_output = garble2str(bytearray(args.infile.read()), 'utf-8')
-    for element in string_output:
-        args.outfile.write(chr(element))
+    string_output = garble2str(args.infile.read())
+    args.outfile.write(string_output)
+
     quit(0)
 
 

@@ -2,22 +2,22 @@
 Simple obfuscatory cipher
 
 Proof of bi-directionality:
-|-> diff --brief gen-enc-input.txt gen-dec-output.txt 
-Files gen-enc-input.txt and gen-dec-output.txt differ
+	|-> diff --brief gen-enc-input.txt gen-dec-output.txt 
+	Files gen-enc-input.txt and gen-dec-output.txt differ
 
-|-> time python3 ObFUscate.py encrypt gen-enc-input.txt gen-enc-output.txt
+	|-> time python3 ObFUscate.py encrypt gen-enc-input.txt gen-enc-output.txt
 
-real	0m9.068s
-user	0m8.832s
-sys	0m0.146s
+	real	0m9.068s
+	user	0m8.832s
+	sys	0m0.146s
 
-|-> time python3 ObFUscate.py decrypt gen-enc-output.txt gen-dec-output.txt
+	|-> time python3 ObFUscate.py decrypt gen-enc-output.txt gen-dec-output.txt
 
-real	0m3.266s
-user	0m3.228s
-sys	0m0.030s
+	real	0m3.266s
+	user	0m3.228s
+	sys	0m0.030s
 
-|-> diff --brief gen-enc-input.txt gen-dec-output.txt 
+	|-> diff --brief gen-enc-input.txt gen-dec-output.txt 
 
 
 This is the idea:

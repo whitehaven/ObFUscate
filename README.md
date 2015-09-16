@@ -2,6 +2,7 @@
 Simple obfuscatory cipher
 
 Proof of bi-directionality:
+
 	|-> diff --brief gen-enc-input.txt gen-dec-output.txt 
 	Files gen-enc-input.txt and gen-dec-output.txt differ
 

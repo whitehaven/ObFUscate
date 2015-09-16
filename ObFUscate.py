@@ -85,13 +85,13 @@ parser.add_argument('--version', action='version', version='ObFUscate v1.0 | 11 
 
 subparsers = parser.add_subparsers(dest='mode')
 
-parser_encrypt = subparsers.add_parser('encrypt', help='execute (forward) operation')
+parser_encrypt = subparsers.add_parser('encrypt', help='execute encryption (forward operation)')
 parser_encrypt.add_argument('infile', nargs='?', type=argparse.FileType('r'), default=sys.stdin,
                             help='(default to stdin)')
 parser_encrypt.add_argument('outfile', nargs='?', type=argparse.FileType('w'), default=sys.stdout,
                             help='(default to stdin)')
 
-parser_decrypt = subparsers.add_parser('decrypt', help='execute (backward) operation')
+parser_decrypt = subparsers.add_parser('decrypt', help='execute decryption (backward operation)')
 parser_decrypt.add_argument('infile', nargs='?', type=argparse.FileType('r'), default=sys.stdin,
                             help='(default to stdin)')
 parser_decrypt.add_argument('outfile', nargs='?', type=argparse.FileType('w'), default=sys.stdout,
